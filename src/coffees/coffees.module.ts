@@ -8,6 +8,7 @@ import { CoffeesService } from './coffees.service';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 import { ConfigModule } from '@nestjs/config';
+import coffeesConfig from './config/coffees.config';
 
 /* When registering entities, we use the forFeature module.
 For the main app module we use the forRoot method. */
@@ -24,13 +25,16 @@ export class CoffeeBrandFactory {
 
 // Class injection syntax
 
-class ConfigService {}
-class DevelopmentService {}
-class ProductionConfigService {}
+// class ConfigService {}
+// class DevelopmentService {}
+// class ProductionConfigService {}
 
 // class MockCoffeesService {} //Value Based Provider
 @Module({
-  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event]), ConfigModule],
+  imports: [
+    TypeOrmModule.forFeature([Coffee, Flavor, Event]),
+    ConfigModule.forFeature(coffeesConfig),
+  ],
   controllers: [CoffeesController],
   providers: [
     CoffeesService,
