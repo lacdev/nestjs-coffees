@@ -7,12 +7,14 @@ import { CoffeesController } from './coffees.controller';
 import { CoffeesService } from './coffees.service';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
+import { ConfigModule } from '@nestjs/config';
 
 /* When registering entities, we use the forFeature module.
 For the main app module we use the forRoot method. */
 
 // Factory Pattern syntax
 
+/* The CoffeeBrandFactory class is a class that creates an array of coffee brands */
 @Injectable()
 export class CoffeeBrandFactory {
   create() {
@@ -28,7 +30,7 @@ class ProductionConfigService {}
 
 // class MockCoffeesService {} //Value Based Provider
 @Module({
-  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
+  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event]), ConfigModule],
   controllers: [CoffeesController],
   providers: [
     CoffeesService,

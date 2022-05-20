@@ -23,6 +23,7 @@ export class CoffeesController {
   }
 
   //   @Get('flavors') //Nested path coffees/flavors
+  /* A method that is called when a GET request is made to the /coffees endpoint. */
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     // const { limit, offset } = paginationQuery;
@@ -35,6 +36,8 @@ export class CoffeesController {
     return this.coffeesService.findOne('' + id);
   }
 
+  /* A method that is called when a POST request is made to the /coffees endpoint. */
+  /* A decorator that is used to decorate a class method. */
   @Post()
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
     console.log(createCoffeeDto instanceof CreateCoffeeDto);

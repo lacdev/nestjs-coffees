@@ -1,5 +1,6 @@
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
+/* Creating a class called Event that implements the EventType interface. */
 export interface EventType {
   id: number;
   type: string;

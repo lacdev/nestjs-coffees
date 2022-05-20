@@ -5,10 +5,11 @@ import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
 import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
 import { ConfigModule } from '@nestjs/config';
-// import * as Joi from '@hapi/joi';
 import * as Joi from '@hapi/joi';
 // import { DatabaseModule } from './database/database.module';
 
+/* We're importing the ConfigModule, the CoffeesModule, the TypeOrmModule, and the CoffeeRatingModule. 
+We're also importing the AppController and the AppService */
 @Module({
   imports: [
     ConfigModule.forRoot({

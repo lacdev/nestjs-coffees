@@ -7,7 +7,8 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 import { Event } from 'src/events/entities/event.entity';
-import { COFFEE_BRANDS } from './coffees.constants';
+// import { COFFEE_BRANDS } from './coffees.constants';
+import { ConfigService } from '@nestjs/config';
 
 // { scope: Scope.REQUEST } Instatiation in every request. It slows the app, so use scope.DEFAULT if possible.
 @Injectable() // Without Scope.TRANSIENT the service is a singleton again.
@@ -18,10 +19,13 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
     private readonly connection: Connection,
-    @Inject(COFFEE_BRANDS) coffeeBrands: string[], //String literal syntax
+    private readonly configService: ConfigService,
   ) {
-    // console.log(coffeeBrands);
-    console.log('CoffeeService Instantiated');
+    const databaseHost = this.configService.get<string>(
+      'DATABASE_HOST',
+      'localhost',
+    );
+    console.log(databaseHost);
   }
 
   findAll(paginationQuery: PaginationQueryDto) {

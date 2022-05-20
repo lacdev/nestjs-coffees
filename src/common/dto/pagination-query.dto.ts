@@ -1,6 +1,7 @@
 // import { Type } from 'class-transformer';
 import { IsOptional, IsPositive } from 'class-validator';
 
+/* It's a class that contains two optional properties, limit and offset, which are both positive numbers */
 export class PaginationQueryDto {
   @IsOptional()
   @IsPositive()
