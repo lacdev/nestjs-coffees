@@ -5,12 +5,21 @@ import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
 import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
 import { ConfigModule } from '@nestjs/config';
+// import * as Joi from '@hapi/joi';
+import * as Joi from '@hapi/joi';
 // import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      validationSchema: Joi.object({
+        DATABASE_HOST: Joi.required(),
+        DATABASE_PORT: Joi.number().default(5432),
+      }),
+      // envFilePath: '.environment',
+      // ignoreEnvFile: true // This is used for production when you need to provide your env variables to the UI
+    }),
     CoffeesModule,
-    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DATABASE_HOST,
