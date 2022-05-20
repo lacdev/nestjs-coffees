@@ -17,7 +17,7 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
     private readonly connection: Connection,
-    @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+    @Inject(COFFEE_BRANDS) coffeeBrands: string[], //String literal syntax
   ) {
     console.log(coffeeBrands);
   }
