@@ -1,4 +1,4 @@
-import { Injectable, Module } from '@nestjs/common';
+import { Injectable, Module, Scope } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Event } from 'src/events/entities/event.entity';
 import { Connection } from 'typeorm';
@@ -49,6 +49,7 @@ class ProductionConfigService {}
         return coffeeBrands;
       },
       inject: [Connection],
+      // scope: Scope.TRANSIENT,
       // useFactory: () => ['buddy brew', 'nescafe'],
       // inject: [CoffeeBrandFactory] // For Factory providers
     },

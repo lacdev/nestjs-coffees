@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, Scope } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Connection, Repository } from 'typeorm';
@@ -9,7 +9,8 @@ import { Flavor } from './entities/flavor.entity';
 import { Event } from 'src/events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
 
-@Injectable()
+// { scope: Scope.REQUEST } Instatiation in every request. It slows the app, so use scope.DEFAULT if possible.
+@Injectable() // Without Scope.TRANSIENT the service is a singleton again.
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee)
@@ -19,7 +20,8 @@ export class CoffeesService {
     private readonly connection: Connection,
     @Inject(COFFEE_BRANDS) coffeeBrands: string[], //String literal syntax
   ) {
-    console.log(coffeeBrands);
+    // console.log(coffeeBrands);
+    console.log('CoffeeService Instantiated');
   }
 
   findAll(paginationQuery: PaginationQueryDto) {

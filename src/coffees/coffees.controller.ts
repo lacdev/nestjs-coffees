@@ -18,7 +18,9 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Controller('coffees')
 export class CoffeesController {
-  constructor(private readonly coffeesService: CoffeesService) {}
+  constructor(private readonly coffeesService: CoffeesService) {
+    console.log('CoffeesController created');
+  }
 
   //   @Get('flavors') //Nested path coffees/flavors
   @Get()
