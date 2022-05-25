@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 /**
  * "Create a new instance of the ValidationPipe class and pass it to the useGlobalPipes() function."
@@ -29,7 +30,8 @@ async function bootstrap() {
         enableImplicitConversion: true,
       },
     }),
-  );
+  ),
+    app.useGlobalFilters(new HttpExceptionFilter());
   /* It's telling the app to listen on port 3000. */
   await app.listen(3000);
 }
