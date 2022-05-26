@@ -9,6 +9,7 @@ import appConfig from 'src/config/app.config';
 import { APP_PIPE } from '@nestjs/core';
 // import * as Joi from '@hapi/joi';
 // import { DatabaseModule } from './database/database.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { APP_PIPE } from '@nestjs/core';
       }), // Disable this in production. Only use with dev env.)}
     }),
     CoffeeRatingModule,
+    CommonModule,
     // DatabaseModule,
   ],
   controllers: [AppController],
