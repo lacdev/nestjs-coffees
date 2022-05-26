@@ -13,6 +13,7 @@ import {
   UsePipes,
   ValidationPipe,
   SetMetadata,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { Public } from 'src/common/decorators/public.decorator';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
@@ -37,8 +38,8 @@ export class CoffeesController {
 
   @Public()
   @Get(':id')
-  findOne(@Param('id') id: number) {
-    console.log(typeof id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    console.log(id);
     return this.coffeesService.findOne('' + id);
   }
 
