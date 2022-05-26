@@ -47,19 +47,18 @@ export class CoffeeBrandFactory {
     //       ? DevelopmentService
     //       : ProductionConfigService,
     // },
-    {
-      provide: COFFEE_BRANDS,
-      useFactory: async (connection: Connection): Promise<string[]> => {
-        // const coffeeBrands = await connection.query('SELECT * FROM ...')
-        const coffeeBrands = await Promise.resolve(['buddy brew', 'nescafe'])
-        console.log('[!] Async Factory')
-        return coffeeBrands
-      },
-      inject: [Connection],
-      // scope: Scope.TRANSIENT,
-      // useFactory: () => ['buddy brew', 'nescafe'],
-      // inject: [CoffeeBrandFactory] // For Factory providers
-    },
+    // {
+    //   provide: COFFEE_BRANDS,
+    //   useFactory: async (connection: Connection): Promise<string[]> => {
+    //     // const coffeeBrands = await connection.query('SELECT * FROM ...')
+    //     const coffeeBrands = await Promise.resolve(['buddy brew', 'nescafe'])
+    //     return coffeeBrands
+    //   },
+    //   inject: [Connection],
+    //   // scope: Scope.TRANSIENT,
+    //   // useFactory: () => ['buddy brew', 'nescafe'],
+    //   // inject: [CoffeeBrandFactory] // For Factory providers
+    // },
   ],
   // providers: [{ provide: CoffeesService, useValue: new MockCoffeesService() }],
   exports: [CoffeesService],

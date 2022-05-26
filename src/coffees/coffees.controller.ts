@@ -16,8 +16,8 @@ import {
   ParseIntPipe,
 } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
-// import { Protocol } from 'src/common/decorators/protocol.decorator';
-// import { Public } from 'src/common/decorators/public.decorator'
+import { Protocol } from 'src/common/decorators/protocol.decorator'
+import { Public } from 'src/common/decorators/public.decorator'
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto'
 import { CoffeesService } from './coffees.service'
 import { CreateCoffeeDto } from './dto/create-coffee.dto'
@@ -47,7 +47,6 @@ export class CoffeesController {
   // @Public()
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
-    console.log(id)
     return this.coffeesService.findOne('' + id)
   }
 
@@ -56,7 +55,6 @@ export class CoffeesController {
   // @Public()
   @Post()
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
-    console.log(createCoffeeDto instanceof CreateCoffeeDto)
     return this.coffeesService.create(createCoffeeDto)
   }
 

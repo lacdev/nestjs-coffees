@@ -1,11 +1,12 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule } from './app.module';
-import { HttpExceptionFilter } from './common/filters/http-exception.filter';
-import { ApiKeyGuard } from './common/guards/api-key.guard';
-import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
-import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
+/* eslint-disable prettier/prettier */
+import { ValidationPipe } from '@nestjs/common'
+import { NestFactory } from '@nestjs/core'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import { AppModule } from './app.module'
+import { HttpExceptionFilter } from './common/filters/http-exception.filter'
+import { ApiKeyGuard } from './common/guards/api-key.guard'
+import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor'
+import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor'
 
 /**
  * "Create a new instance of the ValidationPipe class and pass it to the useGlobalPipes() function."
@@ -24,32 +25,32 @@ async function bootstrap() {
   
   The NestFactoryStatic interface is a built-in interface that comes with NestJS. It's an interface that defines a create()
   function. The create() function is a function that takes one argument: the module that's being bootstrapped. */
-  const app = await NestFactory.create(AppModule);
-  // app.useGlobalPipes(
-  //   new ValidationPipe({
-  //     whitelist: true,
-  //     transform: true,
-  //     forbidNonWhitelisted: true,
-  //     transformOptions: {
-  //       enableImplicitConversion: true,
-  //     },
-  //   }),
-  // );
-  // app.useGlobalFilters(new HttpExceptionFilter());
+  const app = await NestFactory.create(AppModule)
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      forbidNonWhitelisted: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    }),
+  )
+  // app.useGlobalFilters(new HttpExceptionFilter())
   // app.useGlobalInterceptors(
   //   new WrapResponseInterceptor(),
   //   new TimeoutInterceptor(),
-  // );
+  // )
 
   const options = new DocumentBuilder()
     .setTitle('Iluvcoffee')
     .setDescription('Coffee application')
     .setVersion('1.0')
-    .build();
+    .build()
 
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  const document = SwaggerModule.createDocument(app, options)
+  SwaggerModule.setup('api', app, document)
 
-  await app.listen(3000);
+  await app.listen(3000)
 }
-bootstrap();
+bootstrap()

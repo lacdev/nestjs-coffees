@@ -26,7 +26,6 @@ export class CoffeesService {
     private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
   ) {
     // const coffeesConfig = this.configService.get('coffees.foo');
-    console.log(coffeesConfiguration)
   }
 
   findAll(paginationQuery: PaginationQueryDto) {
