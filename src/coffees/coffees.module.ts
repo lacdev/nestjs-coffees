@@ -1,14 +1,15 @@
-import { Injectable, Module, Scope } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Event } from 'src/events/entities/event.entity';
-import { Connection } from 'typeorm';
-import { COFFEE_BRANDS } from './coffees.constants';
-import { CoffeesController } from './coffees.controller';
-import { CoffeesService } from './coffees.service';
-import { Coffee } from './entities/coffee.entity';
-import { Flavor } from './entities/flavor.entity';
-import { ConfigModule } from '@nestjs/config';
-import coffeesConfig from './config/coffees.config';
+/* eslint-disable prettier/prettier */
+import { Injectable, Module, Scope } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { Event } from '../events/entities/event.entity'
+import { Connection } from 'typeorm'
+import { COFFEE_BRANDS } from './coffees.constants'
+import { CoffeesController } from './coffees.controller'
+import { CoffeesService } from './coffees.service'
+import { Coffee } from './entities/coffee.entity'
+import { Flavor } from './entities/flavor.entity'
+import { ConfigModule } from '@nestjs/config'
+import coffeesConfig from './config/coffees.config'
 
 /* When registering entities, we use the forFeature module.
 For the main app module we use the forRoot method. */
@@ -19,7 +20,7 @@ For the main app module we use the forRoot method. */
 @Injectable()
 export class CoffeeBrandFactory {
   create() {
-    return ['buddy brew', 'nescafe'];
+    return ['buddy brew', 'nescafe']
   }
 }
 
@@ -50,9 +51,9 @@ export class CoffeeBrandFactory {
       provide: COFFEE_BRANDS,
       useFactory: async (connection: Connection): Promise<string[]> => {
         // const coffeeBrands = await connection.query('SELECT * FROM ...')
-        const coffeeBrands = await Promise.resolve(['buddy brew', 'nescafe']);
-        console.log('[!] Async Factory');
-        return coffeeBrands;
+        const coffeeBrands = await Promise.resolve(['buddy brew', 'nescafe'])
+        console.log('[!] Async Factory')
+        return coffeeBrands
       },
       inject: [Connection],
       // scope: Scope.TRANSIENT,
@@ -60,7 +61,7 @@ export class CoffeeBrandFactory {
       // inject: [CoffeeBrandFactory] // For Factory providers
     },
   ],
-  // providers: [{provide: CoffeesService, useValue: new MockCoffeesService()}]
+  // providers: [{ provide: CoffeesService, useValue: new MockCoffeesService() }],
   exports: [CoffeesService],
 })
 export class CoffeesModule {}

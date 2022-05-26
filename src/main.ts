@@ -25,21 +25,21 @@ async function bootstrap() {
   The NestFactoryStatic interface is a built-in interface that comes with NestJS. It's an interface that defines a create()
   function. The create() function is a function that takes one argument: the module that's being bootstrapped. */
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-      forbidNonWhitelisted: true,
-      transformOptions: {
-        enableImplicitConversion: true,
-      },
-    }),
-  );
-  app.useGlobalFilters(new HttpExceptionFilter());
-  app.useGlobalInterceptors(
-    new WrapResponseInterceptor(),
-    new TimeoutInterceptor(),
-  );
+  // app.useGlobalPipes(
+  //   new ValidationPipe({
+  //     whitelist: true,
+  //     transform: true,
+  //     forbidNonWhitelisted: true,
+  //     transformOptions: {
+  //       enableImplicitConversion: true,
+  //     },
+  //   }),
+  // );
+  // app.useGlobalFilters(new HttpExceptionFilter());
+  // app.useGlobalInterceptors(
+  //   new WrapResponseInterceptor(),
+  //   new TimeoutInterceptor(),
+  // );
 
   const options = new DocumentBuilder()
     .setTitle('Iluvcoffee')
