@@ -49,22 +49,11 @@ describe('[Feature] Coffees - /coffees', () => {
         },
       }),
     )
-    // app.useGlobalFilters(new HttpExceptionFilter())
-    // app.useGlobalInterceptors(
-    //   new WrapResponseInterceptor(),
-    //   new TimeoutInterceptor(),
-    // )
+
     await app.init()
   })
-  //   it('responds with json', async function() {
-  //     const response = await request(app)
-  //       .get('/users')
-  //       .set('Accept', 'application/json')
-  //     expect(response.headers["Content-Type"]).toMatch(/json/);
-  //     expect(response.status).toEqual(200);
-  //     expect(response.body.email).toEqual('foo@bar.com');
 
-  it('Create [POST /] ', async () => {
+  it('Create one coffee [POST /] ', async () => {
     const response = await request(app.getHttpServer())
       .post('/coffees')
       .send(coffee as CreateCoffeeDto)
@@ -78,7 +67,7 @@ describe('[Feature] Coffees - /coffees', () => {
     ])
   })
 
-  it('Get All [GET /]', async () => {
+  it('Gets All coffees [GET /]', async () => {
     const response = await request(app.getHttpServer()).get('/coffees')
     expect(200)
     expect(response.body).toHaveLength(1)
@@ -97,18 +86,26 @@ describe('[Feature] Coffees - /coffees', () => {
     ])
   })
 
-  it('Get one [GET /:id]', async () => {
+  it('Gets one existing coffee [GET /:id]', async () => {
     const response = await request(app.getHttpServer()).get('/coffees/1')
     expect(200)
     expect(response.body.name).toEqual('A great coffee')
     expect(response.body.brand).toEqual('Nescafe')
   })
 
-  it('Should not find the not existing coffee [GET /:id]', () => {
+  it('throws a 404 for missing coffee [GET /:id]', () => {
     return request(app.getHttpServer()).get('/coffees/3').expect(404)
   })
 
-  it('Update One [PATCH /:id]', async () => {
+  it('responds with json [GET /]', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/coffees')
+      .set('Accept', 'application/json')
+    expect(response.headers['content-type']).toMatch('application/json')
+    expect(response.status).toEqual(200)
+  })
+
+  it('Updates existing coffee [PATCH /:id]', async () => {
     const response = await request(app.getHttpServer())
       .patch('/coffees/1')
       .send({
@@ -138,6 +135,18 @@ describe('[Feature] Coffees - /coffees', () => {
     })
   })
 
+  it('does not update a non existing coffee  [PATCH /:id]', async () => {
+    const response = await request(app.getHttpServer())
+      .patch('/coffees/6')
+      .send({
+        name: 'An updated coffee',
+        brand: 'Updated brand',
+        flavors: ['test1', 'test2'],
+      } as UpdateCoffeeDto)
+
+    expect(404)
+  })
+
   it('Delete One [DELETE /:id]', () => {
     return request(app.getHttpServer()).delete('/coffees/1').expect(200)
   })
@@ -146,7 +155,7 @@ describe('[Feature] Coffees - /coffees', () => {
     return request(app.getHttpServer()).get('/coffees/1').expect(404)
   })
 
-  it('Delete One [DELETE /:id]', () => {
+  it('Does not delete a non existing coffee [DELETE /:id]', () => {
     return request(app.getHttpServer()).delete('/coffees/5').expect(404)
   })
 
