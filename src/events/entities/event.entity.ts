@@ -4,15 +4,15 @@ import * as mongoose from 'mongoose';
 export class EventEntity {}
 
 @Schema()
-export class Event extends Document {
+export class Event extends mongoose.Document {
   @Prop()
   type: string;
 
   @Prop({ index: true })
   name: string;
 
-  @Prop(mongoose.SchemaTypes.Mixed)
-  paylaod: Record<string, any>;
+  @Prop()
+  payload: string;
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

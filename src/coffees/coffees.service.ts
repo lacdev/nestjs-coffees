@@ -11,6 +11,7 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Coffee } from './entities/coffee.entity';
 import { Model, Connection } from 'mongoose';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { Event } from '../events/entities/event.entity';
 
 @Injectable()
 export class CoffeesService {
@@ -65,7 +66,7 @@ export class CoffeesService {
     return await this.coffeeModel.findOneAndDelete({ _id: id });
   }
 
-  async recommendCoffee(coffee: Cofee) {
+  async recommendCoffee(coffee: Coffee) {
     const session = await this.connection.startSession();
     session.startTransaction();
 
